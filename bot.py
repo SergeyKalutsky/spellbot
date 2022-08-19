@@ -1,4 +1,5 @@
 import logging
+from words import get_word_data
 from aiogram import Bot, Dispatcher, executor, types
 from credentials import API_TOKEN
 
@@ -20,7 +21,9 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler()
 async def echo(message: types.Message):
-    await message.answer(message.text)
+    defenition = get_word_data()
+    await bot.send_audio(message.from_user.id, open("word.mp3", "rb"), performer="Performer", title="Title")
+    await message.answer(defenition)
 
 
 if __name__ == '__main__':
