@@ -1,8 +1,7 @@
 import logging
 from aiogram import Bot, Dispatcher, executor, types
+from credentials import API_TOKEN
 
-
-API_TOKEN = "5495057823:AAEbWCZmMwYZeGsBzans-lKevrSyulp63t8"
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
@@ -19,27 +18,8 @@ async def send_welcome(message: types.Message):
     await message.reply("Hi!\nI'm EchoBot!\nPowered by aiogram.")
 
 
-@dp.message_handler(regexp='(^cat[s]?$|puss)')
-async def cats(message: types.Message):
-    with open('data/cats.jpg', 'rb') as photo:
-        '''
-        # Old fashioned way:
-        await bot.send_photo(
-            message.chat.id,
-            photo,
-            caption='Cats are here 😺',
-            reply_to_message_id=message.message_id,
-        )
-        '''
-
-        await message.reply_photo(photo, caption='Cats are here 😺')
-
-
 @dp.message_handler()
 async def echo(message: types.Message):
-    # old style:
-    # await bot.send_message(message.chat.id, message.text)
-
     await message.answer(message.text)
 
 
